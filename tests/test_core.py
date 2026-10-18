@@ -171,10 +171,6 @@ class FetchGuards(unittest.TestCase):
                          (None, None))
 
 
-if __name__ == "__main__":
-    unittest.main(verbosity=2)
-
-
 class Provenance(unittest.TestCase):
     """Found by reading real output: press-sourced numbers were tagged Filed."""
     def test_press_sourced_findings_downgraded(self):
@@ -243,3 +239,7 @@ class SourceLinks(unittest.TestCase):
             fetch.index_url("0000730263", "0000730263-26-000028"),
             "https://www.sec.gov/Archives/edgar/data/730263/"
             "000073026326000028/0000730263-26-000028-index.htm")
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
