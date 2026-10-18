@@ -1,0 +1,136 @@
+{
+ "_provenance": "Form 4s and the plan-termination 8-K are EDGAR filings (accessions below). Revenue, cash flow and stock-sale figures are from Oracle's Sept 10, 2026 release as published on oracle.com; re-verify against the 8-K Ex. 99.1 in a live run.",
+ "company": "Oracle",
+ "ticker": "ORCL",
+ "fiscal_label": "Q1 FY27",
+ "period_end": "2026-08-31",
+ "fy_end_month": 5,
+ "fy_naming": "end",
+ "revenue": {
+  "value": 19350000000
+ },
+ "cash_flow": {
+  "ocf": 23000000000,
+  "fcf": -5000000000,
+  "source": {
+   "form": "8-K",
+   "filed": "2026-09-10",
+   "accession": "",
+   "section": "Earnings release",
+   "url": "https://www.oracle.com/news/announcement/q1fy27-earnings-release-2026-09-10/"
+  }
+ },
+ "capital_actions": [
+  {
+   "type": "equity_sale",
+   "dollars": 20000000000,
+   "source": {
+    "form": "8-K",
+    "filed": "2026-09-10",
+    "accession": "",
+    "section": "Capital funding",
+    "url": "https://www.oracle.com/news/announcement/q1fy27-earnings-release-2026-09-10/"
+   }
+  }
+ ],
+ "insider_txns": [
+  {
+   "insider": "Stuart Levey",
+   "code": "F",
+   "shares": 11883,
+   "price": 144.79,
+   "source": {
+    "form": "4",
+    "filed": "2026-09-17",
+    "accession": "0001341439-26-000081",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001341439/000134143926000081/form4.xml"
+   }
+  },
+  {
+   "insider": "Mark Hura",
+   "code": "F",
+   "shares": 12440,
+   "price": 144.79,
+   "source": {
+    "form": "4",
+    "filed": "2026-09-17",
+    "accession": "0001341439-26-000080",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001341439/000134143926000080/form4.xml"
+   }
+  },
+  {
+   "insider": "Michael Sicilia",
+   "code": "F",
+   "shares": 25468,
+   "price": 144.79,
+   "source": {
+    "form": "4",
+    "filed": "2026-09-17",
+    "accession": "0001341439-26-000083",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001341439/000134143926000083/form4.xml"
+   }
+  },
+  {
+   "insider": "Michael Sicilia",
+   "code": "S",
+   "shares": 10882,
+   "price": 139.94,
+   "plan_10b5_1": true,
+   "source": {
+    "form": "4",
+    "filed": "2026-09-17",
+    "accession": "0001341439-26-000083",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001341439/000134143926000083/form4.xml"
+   }
+  },
+  {
+   "insider": "Jeffrey Henley",
+   "code": "F",
+   "shares": 8635,
+   "price": 144.79,
+   "source": {
+    "form": "4",
+    "filed": "2026-09-17",
+    "accession": "0001341439-26-000079",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001341439/000134143926000079/form4.xml"
+   }
+  },
+  {
+   "insider": "Clayton Magouyrk",
+   "code": "F",
+   "shares": 24182,
+   "price": 144.79,
+   "source": {
+    "form": "4",
+    "filed": "2026-09-17",
+    "accession": "0001341439-26-000082",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001341439/000134143926000082/form4.xml"
+   }
+  },
+  {
+   "insider": "Maria Smith",
+   "code": "F",
+   "shares": 6874,
+   "price": 144.79,
+   "source": {
+    "form": "4",
+    "filed": "2026-09-17",
+    "accession": "0001341439-26-000084",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001341439/000134143926000084/form4.xml"
+   }
+  }
+ ],
+ "plan_events": [
+  {
+   "insider": "Larry Ellison",
+   "event": "terminated",
+   "source": {
+    "form": "8-K",
+    "filed": "2026-09-12",
+    "accession": "0001193125-26-389753",
+    "section": "Item 8.01",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001341439/000119312526389753/d20034d8k.htm"
+   }
+  }
+ ]
+}
