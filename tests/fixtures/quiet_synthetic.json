@@ -1,0 +1,72 @@
+{
+ "_provenance": "SYNTHETIC control case. Not a real company. Nothing notable should be flagged.",
+ "company": "Example Corp",
+ "ticker": "EXMP",
+ "fiscal_label": "Q2 FY26",
+ "period_end": "2026-06-30",
+ "fy_end_month": 12,
+ "fy_naming": "end",
+ "revenue": {
+  "value": 1000000000
+ },
+ "cash_flow": {
+  "ocf": 200000000,
+  "fcf": 150000000,
+  "source": {
+   "form": "10-Q",
+   "filed": "2026-08-01",
+   "accession": "",
+   "url": "https://example.com/synthetic-control"
+  }
+ },
+ "divergences": [
+  {
+   "a_name": "Operating income",
+   "a_now": 210000000,
+   "a_prev": 200000000,
+   "b_name": "Net income",
+   "b_now": 160000000,
+   "b_prev": 152000000,
+   "source": {
+    "form": "10-Q",
+    "filed": "2026-08-01",
+    "accession": "",
+    "url": "https://example.com/synthetic-control"
+   }
+  }
+ ],
+ "backlog": {
+  "rpo_series": [
+   3000000000,
+   3150000000,
+   3300000000
+  ],
+  "revenue_series": [
+   950000000,
+   975000000,
+   1000000000
+  ],
+  "sources": [
+   {
+    "form": "10-Q",
+    "filed": "2026-08-01",
+    "accession": "",
+    "url": "https://example.com/synthetic-control"
+   }
+  ]
+ },
+ "insider_txns": [
+  {
+   "insider": "A. Example",
+   "code": "F",
+   "shares": 1000,
+   "price": 50.0,
+   "source": {
+    "form": "4",
+    "filed": "2026-08-05",
+    "accession": "",
+    "url": "https://example.com/synthetic-control"
+   }
+  }
+ ]
+}

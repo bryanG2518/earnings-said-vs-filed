@@ -1,0 +1,68 @@
+{
+ "_provenance": "All figures from EDGAR 8-K Ex. 99.1 (0000730263-26-000028), filed 2026-09-22, verified verbatim against the filing text. $ in thousands converted to dollars.",
+ "company": "THOR Industries",
+ "ticker": "THO",
+ "fiscal_label": "Q4 FY26",
+ "revenue": {
+  "value": 2311628000
+ },
+ "divergences": [
+  {
+   "a_name": "Net sales",
+   "a_now": 2311628000,
+   "a_prev": 2523783000,
+   "b_name": "Gross profit",
+   "b_now": 285632000,
+   "b_prev": 370883000,
+   "basis": "the same quarter last year",
+   "source": {
+    "form": "8-K",
+    "filed": "2026-09-22",
+    "accession": "0000730263-26-000028",
+    "section": "Ex. 99.1 financial highlights",
+    "url": "https://www.sec.gov/Archives/edgar/data/730263/000073026326000028/thoq4fy26-earningsrelease.htm"
+   }
+  },
+  {
+   "a_name": "Net sales",
+   "a_now": 2311628000,
+   "a_prev": 2523783000,
+   "b_name": "Net income attributable to THOR",
+   "b_now": 40838000,
+   "b_prev": 125757000,
+   "basis": "the same quarter last year",
+   "source": {
+    "form": "8-K",
+    "filed": "2026-09-22",
+    "accession": "0000730263-26-000028",
+    "section": "Ex. 99.1 financial highlights",
+    "url": "https://www.sec.gov/Archives/edgar/data/730263/000073026326000028/thoq4fy26-earningsrelease.htm"
+   }
+  }
+ ],
+ "capital_actions": [
+  {
+   "type": "buyback",
+   "dollars": 34300000.0,
+   "source": {
+    "form": "8-K",
+    "filed": "2026-09-22",
+    "accession": "0000730263-26-000028",
+    "section": "Ex. 99.1 fourth-quarter highlights",
+    "url": "https://www.sec.gov/Archives/edgar/data/730263/000073026326000028/thoq4fy26-earningsrelease.htm"
+   }
+  }
+ ],
+ "macro_mentions": [
+  {
+   "driver": "interest rates, fuel costs and inflation",
+   "source": {
+    "form": "8-K",
+    "filed": "2026-09-22",
+    "accession": "0000730263-26-000028",
+    "section": "Ex. 99.1 CEO statement",
+    "url": "https://www.sec.gov/Archives/edgar/data/730263/000073026326000028/thoq4fy26-earningsrelease.htm"
+   }
+  }
+ ]
+}

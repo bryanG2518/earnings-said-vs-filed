@@ -1,0 +1,86 @@
+{
+ "_provenance": "Figures from press coverage of Lululemon's Sept 3, 2026 release; no EDGAR accession captured in testing. Must be re-verified against the 8-K Ex. 99.1 in a live run.",
+ "company": "Lululemon",
+ "ticker": "LULU",
+ "fiscal_label": "Q2 FY26",
+ "period_end": "2026-08-02",
+ "fy_end_month": 1,
+ "fy_naming": "start",
+ "revenue": {
+  "value": 2420000000
+ },
+ "eps_gaap": {
+  "value": 2.92
+ },
+ "one_time_items": [
+  {
+   "desc": "tariff refunds and associated interest",
+   "per_share": 0.86,
+   "source": {
+    "form": "8-K",
+    "filed": "2026-09-03",
+    "accession": "",
+    "section": "Release, via press",
+    "url": "https://www.just-style.com/newsletters/lululemon-fy26-q2-sales"
+   }
+  }
+ ],
+ "guidance": [
+  {
+   "metric": "Full-year diluted EPS",
+   "fmt": "eps",
+   "prior_low": 10.95,
+   "prior_high": 11.15,
+   "new_low": 9.48,
+   "new_high": 9.73,
+   "prior_source": {
+    "form": "8-K",
+    "filed": "2026-06-04",
+    "accession": "",
+    "section": "Prior outlook, via press",
+    "url": "https://www.just-style.com/newsletters/lululemon-fy26-q2-sales"
+   },
+   "source": {
+    "form": "8-K",
+    "filed": "2026-09-03",
+    "accession": "",
+    "section": "Outlook, via press",
+    "url": "https://www.just-style.com/newsletters/lululemon-fy26-q2-sales"
+   }
+  },
+  {
+   "metric": "Full-year revenue",
+   "fmt": "usd",
+   "prior_low": 11000000000,
+   "prior_high": 11150000000,
+   "new_low": 10350000000,
+   "new_high": 10500000000,
+   "prior_source": {
+    "form": "8-K",
+    "filed": "2026-06-04",
+    "accession": "",
+    "section": "Prior outlook, via press",
+    "url": "https://www.just-style.com/newsletters/lululemon-fy26-q2-sales"
+   },
+   "source": {
+    "form": "8-K",
+    "filed": "2026-09-03",
+    "accession": "",
+    "section": "Outlook, via press",
+    "url": "https://www.just-style.com/newsletters/lululemon-fy26-q2-sales"
+   }
+  }
+ ],
+ "macro_mentions": [
+  {
+   "driver": "tariffs",
+   "source": {
+    "form": "8-K",
+    "filed": "2026-09-03",
+    "accession": "",
+    "section": "Release, via press",
+    "url": "https://www.just-style.com/newsletters/lululemon-fy26-q2-sales"
+   }
+  }
+ ]
+}
