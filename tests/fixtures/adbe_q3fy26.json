@@ -1,0 +1,47 @@
+{
+ "_provenance": "RPO and revenue from three EDGAR 8-K Ex. 99.1 filings.",
+ "company": "Adobe",
+ "ticker": "ADBE",
+ "fiscal_label": "Q3 FY26",
+ "period_end": "2026-08-28",
+ "fy_end_month": 11,
+ "fy_naming": "end",
+ "revenue": {
+  "value": 6760000000
+ },
+ "backlog": {
+  "rpo_series": [
+   22220000000,
+   22270000000,
+   22160000000
+  ],
+  "revenue_series": [
+   6400000000,
+   6620000000,
+   6760000000
+  ],
+  "sources": [
+   {
+    "form": "8-K",
+    "filed": "2026-03-12",
+    "accession": "0000796343-26-000048",
+    "section": "Ex. 99.1",
+    "url": "https://www.sec.gov/Archives/edgar/data/796343/000079634326000048/adbeex991q126.htm"
+   },
+   {
+    "form": "8-K",
+    "filed": "2026-06-11",
+    "accession": "0000796343-26-000109",
+    "section": "Ex. 99.1",
+    "url": "https://www.sec.gov/Archives/edgar/data/0000796343/000079634326000109/adbeex991q226.htm"
+   },
+   {
+    "form": "8-K",
+    "filed": "2026-09-10",
+    "accession": "0000796343-26-000147",
+    "section": "Ex. 99.1",
+    "url": "https://www.sec.gov/Archives/edgar/data/0000796343/000079634326000147/adbeex991q326.htm"
+   }
+  ]
+ }
+}

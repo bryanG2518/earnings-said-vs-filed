@@ -1,0 +1,51 @@
+{
+ "_provenance": "All figures from EDGAR 10-Q (0001045810-26-000075), $ in millions converted to dollars.",
+ "company": "NVIDIA",
+ "ticker": "NVDA",
+ "fiscal_label": "Q2 FY27",
+ "period_end": "2026-07-26",
+ "fy_end_month": 1,
+ "fy_naming": "end",
+ "revenue": {
+  "value": 96221000000
+ },
+ "divergences": [
+  {
+   "a_name": "Operating income",
+   "a_now": 63734000000,
+   "a_prev": 53536000000,
+   "b_name": "Net income",
+   "b_now": 59688000000,
+   "b_prev": 58321000000,
+   "source": {
+    "form": "10-Q",
+    "filed": "2026-08-26",
+    "accession": "0001045810-26-000075",
+    "section": "MD&A summary",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000075/nvda-20260726.htm"
+   }
+  }
+ ],
+ "footnotes": [
+  {
+   "type": "segment_recast",
+   "source": {
+    "form": "10-Q",
+    "filed": "2026-08-26",
+    "accession": "0001045810-26-000075",
+    "section": "Revenue by market platform, note 1",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000075/nvda-20260726.htm"
+   }
+  },
+  {
+   "type": "reclassification",
+   "source": {
+    "form": "10-Q",
+    "filed": "2026-08-26",
+    "accession": "0001045810-26-000075",
+    "section": "Revenue by market platform, note 2",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000075/nvda-20260726.htm"
+   }
+  }
+ ]
+}
