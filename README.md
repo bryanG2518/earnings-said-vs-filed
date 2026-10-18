@@ -1,7 +1,5 @@
 # Earnings Said vs. Filed
 
-![Earnings Said vs. Filed: a Claude skill that checks what a company said in its earnings release against what it filed with the SEC](docs/banner.png)
-
 A Claude skill that compares what a company said in its earnings release with
 what it filed with the SEC, then writes a one-page brief. Code computes every
 number. Every finding links to the filing it came from.
