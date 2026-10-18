@@ -1,13 +1,13 @@
 # Earnings Said vs. Filed
 
+![Earnings Said vs. Filed: a Claude skill that checks what a company said in its earnings release against what it filed with the SEC](docs/banner.png)
+
 A Claude skill that compares what a company said in its earnings release with
 what it filed with the SEC, then writes a one-page brief. Code computes every
 number. Every finding links to the filing it came from.
 
 > Informational only. Not investment advice. Never recommends buying, selling,
 > or holding anything.
-
-![Terminal demo: the tool prints a cited brief for Oracle's quarter, ending on an insider-activity finding that explains six "disposals" were tax withholding](docs/demo.gif)
 
 ## Try it without installing anything
 
@@ -20,7 +20,7 @@ cd earnings-said-vs-filed/scripts
 python -m ercheck.cli --input ../tests/fixtures/orcl_q1fy27.json
 ```
 
-That prints the Oracle brief from the demo above. Spanish works too:
+That prints the Oracle brief. Spanish works too:
 
 ```bash
 python -m ercheck.cli --input ../tests/fixtures/lulu_q2fy26.json --lang es
