@@ -1,0 +1,48 @@
+{
+ "_note": "SEED DEV SET ONLY (5 real quarters + 1 synthetic control). Labeled by the author of the rules, so passing here is a smoke test, not evidence. Held-out test quarters must be labeled by someone else, or before rules are frozen.",
+ "dev": {
+  "orcl_q1fy27.json": {
+   "expect": {
+    "capital_action": 1,
+    "cash_vs_earnings": 1,
+    "insider_activity": 1,
+    "plan_event": 1
+   },
+   "must_not": [
+    "discretionary_sale"
+   ]
+  },
+  "avgo_q3fy26.json": {
+   "expect": {
+    "guidance_delta": 1
+   }
+  },
+  "nvda_q2fy27.json": {
+   "expect": {
+    "income_divergence": 1,
+    "footnote_comparability": 2
+   }
+  },
+  "adbe_q3fy26.json": {
+   "expect": {
+    "backlog_vs_revenue": 1
+   }
+  },
+  "lulu_q2fy26.json": {
+   "expect": {
+    "one_time_items": 1,
+    "guidance_delta": 2
+   }
+  },
+  "tho_q4fy26.json": {
+   "expect": {
+    "income_divergence": 2,
+    "capital_action": 1
+   }
+  }
+ },
+ "quiet": [
+  "quiet_synthetic.json"
+ ],
+ "test": {}
+}

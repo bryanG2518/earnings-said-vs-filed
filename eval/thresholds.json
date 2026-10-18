@@ -1,0 +1,8 @@
+{
+  "_note": "Pre-registered 2026-09-22, before any held-out results exist. Do not edit after the test split is run.",
+  "numeric_accuracy": 1.0,
+  "precision_per_kind_min": 0.90,
+  "recall_per_kind_min": 0.80,
+  "false_alarm_rate_max": 0.10,
+  "target_set_size": {"dev": 25, "test": 15, "quiet_controls": 20}
+}
