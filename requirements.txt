@@ -1,0 +1,3 @@
+# Core pipeline: standard library only.
+# Live EDGAR fetching:
+edgartools>=5.54
