@@ -7,6 +7,11 @@ number. Every finding links to the filing it came from.
 > Informational only. Not investment advice. Never recommends buying, selling,
 > or holding anything.
 
+## Watch it work
+
+[Short animated demo](https://claude.ai/artifact/PjxhdtM3nMBbtLGibYS7R3): asking
+the skill about Oracle's quarter, and the finding it comes back with.
+
 ## Try it without installing anything
 
 Six real quarters ship with the repo as fixtures, so you can read the output
