@@ -30,13 +30,6 @@ CONCEPTS = {
 }
 
 
-def index_url(cik, accession):
-    """Standard EDGAR filing-index link. Use the issuer's CIK (not the
-    filing agent's, which is often the accession prefix)."""
-    return ("https://www.sec.gov/Archives/edgar/data/"
-            f"{int(cik)}/{accession.replace('-', '')}/{accession}-index.htm")
-
-
 class BudgetExceeded(RuntimeError):
     pass
 
@@ -59,6 +52,30 @@ def resolve_concept(facts: dict, field: str, period_end: str):
     return None, None
 
 
+def facts_to_companyfacts(facts):
+    """Adapt edgartools' EntityFacts to the companyfacts-style dict that
+    resolve_concept() reads. Dicts pass through unchanged. Dimensioned
+    (segment) facts are skipped. Within a concept, shorter periods come
+    first so a quarter wins over a year-to-date total for the same end."""
+    if isinstance(facts, dict):
+        return facts
+    out = {}
+    for f in facts.get_all_facts():
+        if getattr(f, "is_dimensioned", False) or f.taxonomy != "us-gaap":
+            continue
+        if f.value is None or f.period_end is None:
+            continue
+        days = (f.period_end - f.period_start).days if f.period_start else 0
+        row = {"end": f.period_end.isoformat(), "val": f.value,
+               "form": f.form_type, "_days": days}
+        name = f.concept.split(":", 1)[-1]
+        out.setdefault(name, {"units": {}})["units"].setdefault(f.unit, []).append(row)
+    for entry in out.values():
+        for rows in entry["units"].values():
+            rows.sort(key=lambda r: r["_days"])
+    return {"facts": {"us-gaap": out}}
+
+
 class EdgarSource:
     def __init__(self, identity=None, budget=REQUEST_BUDGET):
         self.identity = identity or os.environ.get("EDGAR_IDENTITY")
@@ -77,10 +94,14 @@ class EdgarSource:
 
     def _lib(self):
         if self._edgar is None:
+            # Newer edgartools reads the limit from the environment; older
+            # versions expose update_rate_limiter(). Support both.
+            os.environ.setdefault("EDGAR_RATE_LIMIT_PER_SEC", str(RATE_LIMIT_PER_SEC))
             import edgar                                   # pip install edgartools
             from edgar import httpclient
             edgar.set_identity(self.identity)
-            httpclient.update_rate_limiter(requests_per_second=RATE_LIMIT_PER_SEC)
+            if hasattr(httpclient, "update_rate_limiter"):
+                httpclient.update_rate_limiter(requests_per_second=RATE_LIMIT_PER_SEC)
             self._edgar = edgar
         return self._edgar
 
@@ -94,7 +115,7 @@ class EdgarSource:
 
     def facts(self, company):
         self._spend()
-        return company.get_facts()
+        return facts_to_companyfacts(company.get_facts())
 
     def filings(self, company, form, limit=4):
         self._spend()

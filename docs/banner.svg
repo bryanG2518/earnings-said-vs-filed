@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640" role="img" aria-label="Earnings Said vs. Filed: checks what a company said in its earnings release against what it filed with the SEC.">
+  <style>
+    .sans { font-family: "IBM Plex Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .mono { font-family: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace; }
+  </style>
+  <rect width="1280" height="640" fill="#EBEFF3"/>
+  <rect x="700" width="580" height="640" fill="#141B26"/>
+
+  <text x="64" y="72" class="mono" font-size="16" letter-spacing="2.4" fill="#566170">SAID · EARNINGS RELEASE</text>
+  <text x="64" y="252" class="sans" font-size="68" font-weight="700" fill="#141B26">Earnings</text>
+  <rect x="322" y="256" width="172" height="83" rx="9" fill="#E8B546"/>
+  <text x="64" y="324" class="sans" font-size="68" font-weight="700" fill="#141B26" textLength="244" lengthAdjust="spacingAndGlyphs">Said vs.</text>
+  <text x="336" y="324" class="sans" font-size="68" font-weight="700" fill="#141B26" textLength="146" lengthAdjust="spacingAndGlyphs">Filed</text>
+  <text x="64" y="480" class="sans" font-size="25" fill="#2A3340">Checks what a company said in its earnings</text>
+  <text x="64" y="509" class="sans" font-size="25" fill="#2A3340">release against what it filed with the SEC.</text>
+  <rect x="65" y="548" width="141" height="36" rx="18" fill="none" stroke="#141B26" stroke-width="1.5"/>
+  <text x="135.5" y="571" class="mono" font-size="15" text-anchor="middle" fill="#141B26">Claude skill</text>
+  <rect x="217" y="548" width="186" height="36" rx="18" fill="none" stroke="#141B26" stroke-width="1.5"/>
+  <text x="310" y="571" class="mono" font-size="15" text-anchor="middle" fill="#141B26">Open source · MIT</text>
+
+  <text x="748" y="72" class="mono" font-size="16" letter-spacing="2.4" fill="#E8B546">FILED · SEC EDGAR</text>
+  <rect x="749" y="164" width="482" height="261" rx="12" fill="#1A2330" stroke="#2D3948" stroke-width="1.5"/>
+  <text x="779" y="206" class="mono" font-size="15" letter-spacing="1.6" fill="#8D99A8">ORACLE · FORM 4 FILINGS · SEPT 2026</text>
+  <text x="779" y="248" class="sans" font-size="23" fill="#8D99A8" text-decoration="line-through">Six executives “disposed of” shares</text>
+  <rect x="779" y="273" width="164" height="29" rx="5" fill="#E8B546"/>
+  <text x="861" y="293" class="mono" font-size="14.5" font-weight="700" text-anchor="middle" letter-spacing="0.6" fill="#141B26">FORM 4 · CODE F</text>
+  <text x="779" y="351" class="sans" font-size="35" font-weight="700" fill="#FFFFFF">Tax withholding on</text>
+  <text x="779" y="391" class="sans" font-size="35" font-weight="700" fill="#FFFFFF">vesting awards, not sales.</text>
+
+  <text x="748" y="527" class="mono" font-size="16" fill="#A0ABB8">Every number computed by code.</text>
+  <text x="748" y="552" class="mono" font-size="16" fill="#A0ABB8">Every finding cites its filing.</text>
+  <text x="748" y="577" class="mono" font-size="16" fill="#A0ABB8">No buy, sell, or hold calls.</text>
+</svg>
