@@ -1,166 +1,173 @@
+<p align="center">
+  <img src="docs/banner.svg" alt="Earnings Said vs. Filed: checks what a company said in its earnings release against what it filed with the SEC." width="100%">
+</p>
+
+<p align="center">
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-E8B546?style=flat-square&labelColor=141B26"></a>
+  <img alt="Claude skill" src="https://img.shields.io/badge/Claude-skill-E8B546?style=flat-square&labelColor=141B26">
+  <img alt="Data source: SEC EDGAR" src="https://img.shields.io/badge/data-SEC%20EDGAR-E8B546?style=flat-square&labelColor=141B26">
+</p>
+
 # Earnings Said vs. Filed
 
-A Claude skill that compares what a company said in its earnings release with
-what it filed with the SEC, then writes a one-page brief. Code computes every
-number. Every finding links to the filing it came from.
+A Claude skill that compares what a public company **said** in its earnings release with
+what it **filed** with the SEC, then produces a one-page brief. Every number is computed
+by code, and every finding cites the filing it came from.
 
-> Informational only. Not investment advice. Never recommends buying, selling,
-> or holding anything.
+> Informational only. Not investment advice. It never recommends buying, selling, or
+> holding anything.
 
-## Watch it work
+## Watch the walkthrough
 
-[Short animated demo](https://claude.ai/artifact/PjxhdtM3nMBbtLGibYS7R3): asking
-the skill about Oracle's quarter, and the finding it comes back with.
+[![Watch the walkthrough on YouTube](https://img.youtube.com/vi/dorHaN9kQCc/maxresdefault.jpg)](https://youtu.be/dorHaN9kQCc "Earnings Said vs. Filed: how to use the skill")
 
-## Try it without installing anything
+**▶ [How to use the skill](https://youtu.be/dorHaN9kQCc)** shows the whole loop: ask about a
+company's latest quarter, get a cited brief back.
 
-Six real quarters ship with the repo as fixtures, so you can read the output
-before deciding whether you want the skill. No API key and no network needed:
+## The problem
 
-```bash
-git clone https://github.com/bryanG2518/earnings-said-vs-filed.git
-cd earnings-said-vs-filed/scripts
-python -m ercheck.cli --input ../tests/fixtures/orcl_q1fy27.json
-```
+An earnings press release is written to be read quickly and favorably. The filings behind it
+(10-Q, 8-K, Form 4) are where the details live, and they rarely get read side by side.
+Headlines say executives "disposed of" shares; the Form 4 says the shares were withheld for
+taxes on vesting. Revenue is up; the backlog is flat. A one-time gain is doing a lot of
+the work in EPS.
 
-That prints the Oracle brief. Spanish works too:
+This skill does that comparison and shows its sources.
 
-```bash
-python -m ercheck.cli --input ../tests/fixtures/lulu_q2fy26.json --lang es
-```
+## What it catches
 
-The brief generator uses only the Python standard library. `edgartools` is
-needed when you want to pull a quarter from EDGAR yourself, not to run the
-fixtures.
+These come from real September 2026 filings:
 
-## What it catches (from real September 2026 filings)
-
-- **Oracle:** six executives "disposed of" shares on the same day. All six
-  were tax withholding on vesting awards (Form 4 code F), not sales. The one
-  actual sale was under a pre-arranged plan. A separate 8-K disclosed a
-  trading-plan termination that never appears on a Form 4.
-- **NVIDIA:** operating income and net income grew at very different rates
-  quarter over quarter, and the 10-Q notes a segment recast.
-- **Adobe:** backlog stayed level across three quarters of rising revenue.
-- **Broadcom:** actual revenue versus the prior quarter's guidance, from two
-  8-Ks alone.
-- **Lululemon:** a one-time item's share of reported EPS, and a guidance cut.
-
-## How to use it
-
-### Install the skill
-
-The skill is the whole folder. `SKILL.md` tells Claude when to run and how to
-drive the pipeline in `scripts/`.
-
-For Claude Code, put the folder where Claude looks for skills, so that
-`SKILL.md` lands at `~/.claude/skills/earnings-said-vs-filed/SKILL.md`:
-
-```bash
-git clone https://github.com/bryanG2518/earnings-said-vs-filed.git
-mkdir -p ~/.claude/skills
-cp -r earnings-said-vs-filed ~/.claude/skills/
-```
-
-For the Claude app, zip the folder with `SKILL.md` at the top level inside it,
-then upload the zip as a custom skill in settings.
-
-### Tell the SEC who you are
-
-The SEC throttles automated clients that don't identify themselves, so set
-this before the first live fetch. Use your own name and a working email:
-
-```bash
-pip install edgartools
-export EDGAR_IDENTITY="Your Name you@email.com"
-```
-
-Add that line to your shell profile and you won't have to think about it again.
-
-### Ask in plain English
-
-Naming the skill is optional. Each of these starts it:
-
-- "What really happened in Oracle's latest earnings?"
-- "Did NVIDIA's insiders sell after the quarter, or was it tax withholding?"
-- "Compare what Adobe said about guidance with what it filed."
-- "Were there any one-time items in Lululemon's EPS?"
-
-Ask for Spanish and you get a Spanish brief.
-
-### What comes back
-
-A one-page brief in four parts. A "what changed" summary. Then the findings,
-each one written as a plain sentence with a link to the exact SEC document
-behind it and a line explaining what the finding does *not* prove. Then a
-source log, and a glossary for terms like 10b5-1 and Form 4 code F.
-
-Follow-up questions work. Ask why a finding fired and it explains from the
-filing, not from memory.
-
-### What it refuses to do
-
-It won't say whether to buy, sell, or hold, won't set price targets, and won't
-tell you whether a stock is cheap. Ask anyway and it declines, then offers to
-walk through a finding instead. When a number can't be traced to a filing, the
-brief prints "not computed" rather than guessing at it.
+| Company | What the filings show |
+|---|---|
+| **Oracle** | Six executives "disposed of" shares on the same day. All six were tax withholding on vesting awards (Form 4 code **F**), not sales. The one actual sale was under a pre-arranged plan, and a separate 8-K disclosed a trading-plan termination that never appears on a Form 4. |
+| **NVIDIA** | Operating income and net income grew at very different rates quarter over quarter, and the 10-Q notes a segment recast. |
+| **Adobe** | Backlog stayed level across three quarters of rising revenue. |
+| **Broadcom** | Actual revenue versus the prior quarter's guidance, from two 8-Ks alone. |
+| **Lululemon** | A one-time item's share of reported EPS, and a guidance cut. |
 
 ## How it stays honest
 
-- **Numbers never come from the model.** The prose is written with
-  placeholders and code fills them in. The validator blocks any digit a model
-  typed directly.
-- **Every source is a link.** Each citation points at the exact document used.
-  A "Filed" tag requires a sec.gov link matching the accession number, and
-  anything else gets labeled Secondary-Unverified and marked as not a filing.
-- **Fail closed:** banned language, a missing citation, or a number that cannot
-  be traced will block the brief instead of degrading it.
-- **Insider codes rather than "buy" and "sell":** Form 4 transactions are
-  classified by their actual code, with no arbitrary cluster threshold.
+- **Numbers never come from the model.** Prose uses placeholders and code fills them in. The
+  validator blocks any digit a model typed.
+- **Provenance is enforced.** A "Filed" confidence tag requires an SEC accession number.
+  Anything else is labeled *Secondary-Unverified*.
+- **Fails closed.** Banned language, missing citations, or untraceable numbers block the
+  brief instead of shipping it with a warning.
+- **Insider codes, not "buy/sell."** Form 4 transactions are classified by transaction code,
+  with no arbitrary cluster threshold.
+- **No advice, by design.** Requests for buy, sell, or hold calls are refused.
 
-## Evaluation status
+## Install
 
-Thresholds were set before any results existed (`eval/thresholds.json`):
-100% numeric accuracy, per-finding precision at or above 90% and recall at or
-above 80% on a held-out set, and a false-alarm rate under 10% on quiet
-quarters.
-
-Where it stands: 5 real development quarters plus 1 synthetic control, labeled
-by the author of the rules. They pass, which makes it a smoke test rather than
-evidence. The held-out test set of 15 quarters and the 20 quiet controls
-aren't built yet. Results will be published here whether they pass or fail.
-
-Run the suite yourself:
+**Claude:** zip the folder so `earnings-reality-check/` sits at the root of the archive, then
+upload it under Settings → Skills. Code execution must be enabled.
 
 ```bash
-cd tests && python -m unittest test_core -v
+git clone https://github.com/bryanG2518/earnings-said-vs-filed.git earnings-reality-check
+zip -r earnings-reality-check.zip earnings-reality-check -x "*/.git/*"
+```
+
+**Claude Code:** clone it into your skills folder.
+
+```bash
+git clone https://github.com/bryanG2518/earnings-said-vs-filed.git ~/.claude/skills/earnings-reality-check
+pip install edgartools
+```
+
+Live fetching needs an identity, because the SEC requires automated clients to say who they
+are. Use any real contact address you can receive mail at:
+
+```bash
+export EDGAR_IDENTITY="Your Name you@example.com"
+```
+
+## Use
+
+Ask in plain language:
+
+```
+What really happened in Oracle's latest quarter? Compare the release to the filings.
+```
+
+```
+Did NVIDIA's insiders sell around earnings, or is that just tax withholding?
+```
+
+```
+Show me anything unusual in Lululemon's guidance this quarter.
+```
+
+You get a one-page brief: findings ordered by materiality, each with its filing citation, plus
+a short glossary for readers who don't live in EDGAR.
+
+## Run it from the command line
+
+```bash
+cd scripts
+python -m ercheck.cli --input ../tests/fixtures/orcl_q1fy27.json
+python -m ercheck.cli --input ../tests/fixtures/lulu_q2fy26.json --lang es
+```
+
+Tests and evaluation:
+
+```bash
+python -m unittest discover -s tests -v
 python eval/run_eval.py --split dev
 ```
 
+## Evaluation status
+
+Thresholds were set before any results existed (`eval/thresholds.json`): 100% numeric
+accuracy, per-finding precision of at least 90% and recall of at least 80% on a held-out set,
+and a false-alarm rate under 10% on quiet quarters.
+
+**Current state:** 5 real development quarters plus 1 synthetic control, labeled by the rules'
+author. They pass, but that is a smoke test, not evidence. The held-out set (15 quarters) and
+20 quiet controls are not built yet. Results will be published here whether they pass or fail.
+
+**Live EDGAR check:** the live fetch path was run against NVIDIA's latest 10-Q on 2 November
+2026. All eight tracked fields resolved from SEC data, using 3 of the 25 requests allowed per
+run.
+
 ## Scope (v1)
 
-US domestic 10-Q and 10-K filers. Not banks, insurers, REITs, or foreign
-private issuers. The fetch layer respects SEC fair-access rules with a
-declared identity, 5 requests per second, and a hard budget of 25 requests
-per run.
+US domestic 10-Q and 10-K filers. Not banks, insurers, REITs, or foreign private issuers. It
+respects the SEC's fair-access rules: declared identity, 5 requests per second, and 25
+requests per run.
 
 ## Known limitations
 
-- Guidance and one-time items live in press-release exhibits rather than XBRL,
-  so they depend on exact-text extraction. Two of the five fixtures still
-  carry press-sourced numbers, labeled Secondary-Unverified until they're
-  checked against EDGAR.
-- Spanish output translates the labels and glossary, not the finding
-  sentences.
-- The live EDGAR path has not been exercised from the build environment, which
-  has no network access.
+- Guidance and one-time items come from press-release exhibits and rely on exact-text
+  extraction. Two of the five fixtures still carry press-sourced numbers and are labeled
+  Secondary-Unverified until checked against EDGAR.
+- Spanish output translates labels and the glossary, not the finding sentences.
+- The eval set is small. Treat the scores as a regression check, not a claim of accuracy.
 
-## Contributing
+## Layout
 
-Bug reports and new quarters are both useful. A quarter the tool gets wrong is
-more useful than one it gets right: open an issue with the ticker, the period,
-and the filing link, and say what it should have caught.
+```
+.
+├── README.md
+├── SKILL.md                  the skill's instructions
+├── LICENSE
+├── requirements.txt
+├── docs/
+│   └── banner.svg            header image
+├── scripts/ercheck/          fetch, compute, rules, validate, render
+├── references/               input schema, stack notes
+├── eval/                     labels, thresholds, runner
+└── tests/                    unit tests and real-filing fixtures
+```
+
+## A note on use
+
+This is a research aid for reading public filings. It is not a recommendation engine, and
+nothing it produces is a basis for a trade. Verify anything that matters against the cited
+filing.
 
 ## License
 
-MIT, with an explicit no-advice notice. See `LICENSE`.
+MIT, with an explicit no-advice notice. See [`LICENSE`](LICENSE).
+
+Built by [Bryan Gutierrez](https://github.com/bryanG2518).
