@@ -10,7 +10,8 @@ def load(name):
     with open(os.path.join(HERE, "fixtures", name)) as fh:
         return json.load(fh)
 
-SRC = Source("10-Q", "2026-08-01", "0000000000-26-000001")
+SRC = Source("10-Q", "2026-08-01", "0001045810-26-000075", "",
+             "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000075/nvda-20260726.htm")
 
 
 class InsiderCodes(unittest.TestCase):
@@ -186,10 +187,6 @@ class FetchGuards(unittest.TestCase):
                          (100, "Revenues"))
 
 
-if __name__ == "__main__":
-    unittest.main(verbosity=2)
-
-
 class Provenance(unittest.TestCase):
     """Found by reading real output: press-sourced numbers were tagged Filed."""
     def test_press_sourced_findings_downgraded(self):
@@ -202,11 +199,63 @@ class Provenance(unittest.TestCase):
 
     def test_validator_rejects_forged_filed_tag(self):
         f = Finding("t", "Revenue was {x}.", {"x": 1e9},
-                    [Source("8-K", "2026-09-01", "https://example.com/pr")],
+                    [Source("8-K", "2026-09-01", "", "", "https://example.com/pr")],
                     "Filed-Reported", "Routine.", formats={"x": "usd"})
-        self.assertTrue(any("accession" in e for e in validate.check_finding(f)))
+        self.assertTrue(any("sec.gov link" in e for e in validate.check_finding(f)))
 
     def test_citation_is_honest(self):
         brief, _ = run(load("lulu_q2fy26.json"))
         self.assertIn("NOT AN SEC FILING", brief)
         self.assertNotIn("accession https://", brief)
+
+
+class SourceLinks(unittest.TestCase):
+    """Every citation must be a working link to the exact document used."""
+    FIXTURES = ["orcl_q1fy27.json", "avgo_q3fy26.json", "nvda_q2fy27.json",
+                "adbe_q3fy26.json", "lulu_q2fy26.json", "tho_q4fy26.json"]
+
+    def test_every_citation_is_a_link(self):
+        import re
+        for name in self.FIXTURES:
+            brief, fs = run(load(name))
+            for f in fs:
+                for s in f.sources:
+                    self.assertIn(f"]({s.url})", brief, name)
+            log = brief.split("## Source log")[1].split("## Glossary")[0]
+            for line in [l for l in log.splitlines() if l.startswith("- ")]:
+                self.assertRegex(line, r"\]\(https?://", name)
+
+    def test_filed_links_point_to_sec(self):
+        brief, _ = run(load("tho_q4fy26.json"))
+        self.assertIn("(https://www.sec.gov/Archives/edgar/data/730263/"
+                      "000073026326000028/thoq4fy26-earningsrelease.htm)", brief)
+
+    def test_missing_link_blocked(self):
+        f = Finding("t", "Revenue was {x}.", {"x": 1e9},
+                    [Source("10-Q", "2026-08-01", "0001045810-26-000075")],
+                    "Filed-Reported", "Routine.", formats={"x": "usd"})
+        self.assertTrue(any("no link" in e for e in validate.check_finding(f)))
+
+    def test_sec_link_to_wrong_filing_blocked(self):
+        wrong = Source("10-Q", "2026-08-01", "0001045810-26-000075", "",
+                       "https://www.sec.gov/Archives/edgar/data/730263/"
+                       "000073026326000028/thoq4fy26-earningsrelease.htm")
+        f = Finding("t", "Revenue was {x}.", {"x": 1e9}, [wrong],
+                    "Filed-Reported", "Routine.", formats={"x": "usd"})
+        self.assertTrue(any("matching" in e for e in validate.check_finding(f)))
+
+    def test_lookalike_domain_blocked(self):
+        fake = Source("8-K", "2026-09-22", "0000730263-26-000028", "",
+                      "https://sec.gov.evil.example/000073026326000028/x.htm")
+        from ercheck.models import is_verified_sec_source
+        self.assertFalse(is_verified_sec_source(fake))
+
+    def test_index_url_helper(self):
+        self.assertEqual(
+            fetch.index_url("0000730263", "0000730263-26-000028"),
+            "https://www.sec.gov/Archives/edgar/data/730263/"
+            "000073026326000028/0000730263-26-000028-index.htm")
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
