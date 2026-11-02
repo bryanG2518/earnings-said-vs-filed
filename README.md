@@ -169,5 +169,3 @@ filing.
 ## License
 
 MIT, with an explicit no-advice notice. See [`LICENSE`](LICENSE).
-
-Built by [Bryan Gutierrez](https://github.com/bryanG2518).
