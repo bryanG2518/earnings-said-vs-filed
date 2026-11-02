@@ -30,6 +30,13 @@ CONCEPTS = {
 }
 
 
+def index_url(cik, accession):
+    """Standard EDGAR filing-index link. Use the issuer's CIK (not the
+    filing agent's, which is often the accession prefix)."""
+    return ("https://www.sec.gov/Archives/edgar/data/"
+            f"{int(cik)}/{accession.replace('-', '')}/{accession}-index.htm")
+
+
 class BudgetExceeded(RuntimeError):
     pass
 
