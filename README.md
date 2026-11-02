@@ -50,8 +50,9 @@ These come from real September 2026 filings:
 
 - **Numbers never come from the model.** Prose uses placeholders and code fills them in. The
   validator blocks any digit a model typed.
-- **Provenance is enforced.** A "Filed" confidence tag requires an SEC accession number.
-  Anything else is labeled *Secondary-Unverified*.
+- **Every source is a link.** Each citation points at the exact document used. A "Filed"
+  tag requires a sec.gov link matching the filing's accession number; anything else is
+  labeled *Secondary-Unverified* and marked as not an SEC filing.
 - **Fails closed.** Banned language, missing citations, or untraceable numbers block the
   brief instead of shipping it with a warning.
 - **Insider codes, not "buy/sell."** Form 4 transactions are classified by transaction code,
@@ -98,10 +99,21 @@ Did NVIDIA's insiders sell around earnings, or is that just tax withholding?
 Show me anything unusual in Lululemon's guidance this quarter.
 ```
 
-You get a one-page brief: findings ordered by materiality, each with its filing citation, plus
-a short glossary for readers who don't live in EDGAR.
+You get a one-page brief in four parts: a "what changed" summary, then the findings (each a
+plain sentence with a link to the exact SEC document behind it, plus a line on what the
+finding does *not* prove), then a source log, then a glossary for terms like 10b5-1 and
+Form 4 code F. Follow-up questions work: ask why a finding fired and it answers from the
+filing, not from memory.
 
-## Run it from the command line
+Ask for buy, sell or hold calls, price targets, or whether a stock is cheap and it declines,
+then offers to walk through a finding instead. When a number can't be traced to a filing, the
+brief prints "not computed" rather than guessing.
+
+## Try it without installing anything
+
+Six real quarters ship with the repo as fixtures, so you can read the output before deciding
+whether you want the skill. No API key and no network needed. The brief generator uses only
+the Python standard library; `edgartools` is only needed to pull a quarter from EDGAR yourself.
 
 ```bash
 cd scripts
@@ -122,7 +134,7 @@ Thresholds were set before any results existed (`eval/thresholds.json`): 100% nu
 accuracy, per-finding precision of at least 90% and recall of at least 80% on a held-out set,
 and a false-alarm rate under 10% on quiet quarters.
 
-**Current state:** 5 real development quarters plus 1 synthetic control, labeled by the rules'
+**Current state:** 6 real development quarters plus 1 synthetic control, labeled by the rules'
 author. They pass, but that is a smoke test, not evidence. The held-out set (15 quarters) and
 20 quiet controls are not built yet. Results will be published here whether they pass or fail.
 
@@ -139,7 +151,7 @@ requests per run.
 ## Known limitations
 
 - Guidance and one-time items come from press-release exhibits and rely on exact-text
-  extraction. Two of the five fixtures still carry press-sourced numbers and are labeled
+  extraction. Two of the fixtures still carry press-sourced numbers and are labeled
   Secondary-Unverified until checked against EDGAR.
 - Spanish output translates labels and the glossary, not the finding sentences.
 - The eval set is small. Treat the scores as a regression check, not a claim of accuracy.
@@ -159,6 +171,12 @@ requests per run.
 ├── eval/                     labels, thresholds, runner
 └── tests/                    unit tests and real-filing fixtures
 ```
+
+## Contributing
+
+Bug reports and new quarters are both useful. A quarter the tool gets wrong is more useful
+than one it gets right: open an issue with the ticker, the period and the filing link, and say
+what it should have caught.
 
 ## A note on use
 
